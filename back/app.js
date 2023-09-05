@@ -14,13 +14,13 @@ app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
-  
+
 const indexRouter = require('./src/routes/index');
-// const usersRouter = require('./src/routes/users');
+const estatesRouter = require('./src/routes/estates');
 // const authRouter = require('./src/routes/auth');
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/estates', estatesRouter);
 // app.use('/authentication', authRouter);
 
 
