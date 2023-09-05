@@ -1,18 +1,13 @@
 import { Button, ScrollView, Text, View } from "react-native";
+import EstateForm from "../components/EstateForm";
 
-export default function EstateModify({route}) {
+export default function EstateModify({route, navigation}) {
     const { id } = route.params;
 
     return (
-        <ScrollView>
-            <View>
-                <Button title="+" color="#ffc512" />
-            </View>
-            <View>
-            <Button title="+" />
-            <Text>{id}</Text>
-
-            </View>
+        <ScrollView contentContainerStyle={{ alignItems: 'center', paddingBottom:100 }}
+        style={{ flex: 1, backgroundColor: '#fff', padding: 17 }}>
+            <EstateForm navigation={navigation} id={id}/>
         </ScrollView>
     );
 }

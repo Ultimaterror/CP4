@@ -8,10 +8,10 @@ async function insertEstate(data) {
     
     return connection.promise().query(sql, [
         data.type,
-        data.room,
-        data.bedroom,
-        data.size,
-        data.price,
+        parseInt(data.room),
+        parseInt(data.bedroom),
+        parseInt(data.size),
+        parseInt(data.price),
         data.place,
         data.picture
     ])
@@ -46,6 +46,7 @@ async function updateEstate(id, data) {
         return {status: 201, message: bodyResponse}
     })
     .catch(error => {
+        console.log(error);
         return {status: 500, message: error}
     })
 }

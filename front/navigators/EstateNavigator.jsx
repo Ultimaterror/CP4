@@ -14,10 +14,10 @@ export default function EstateNavigator() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Accueil" component={Home} />
                 <Stack.Screen name="Details" component={Details} />
-                <Stack.Screen name="New" component={New} />
-                <Stack.Screen name="Modify" component={Modify} />
+                <Stack.Screen name="Nouveau" component={New} />
+                <Stack.Screen name="Modifier" component={Modify} />
             </Stack.Navigator>
             {/* <StatusBar style="auto" /> */}
         </NavigationContainer>
