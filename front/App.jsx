@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EstateNavigator from './navigators/EstateNavigator';
 import { PaperProvider } from 'react-native-paper';
+import { ReloadContextProvider } from "./context/ReloadContext";
 
 export default function App() {
 
@@ -15,9 +16,11 @@ export default function App() {
   // }, [])
 
   return (
-    <PaperProvider>
-      <EstateNavigator />
-    </PaperProvider>
+    <ReloadContextProvider>
+      <PaperProvider>
+        <EstateNavigator />
+      </PaperProvider>
+    </ReloadContextProvider>
     //     <View style={styles.container}>
     //       <Text>Open up App.tsx to start working on your app!</Text>
     //       <StatusBar style="auto" />

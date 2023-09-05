@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, Button, Card, Text } from 'react-native-paper';
+import { Card, Text } from 'react-native-paper';
 
 const EstateCard = ({ navigation, estate }) => (
     <Card onPress={() => navigation.navigate('Details', { id: estate.id })} style={{margin:10}}>
