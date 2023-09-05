@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import EstateNavigator from './navigators/EstateNavigator';
+import { PaperProvider } from 'react-native-paper';
 
 export default function App() {
 
@@ -14,7 +15,9 @@ export default function App() {
   // }, [])
 
   return (
-    <EstateNavigator />
+    <PaperProvider>
+      <EstateNavigator />
+    </PaperProvider>
     //     <View style={styles.container}>
     //       <Text>Open up App.tsx to start working on your app!</Text>
     //       <StatusBar style="auto" />
