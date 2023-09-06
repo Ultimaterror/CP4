@@ -1,7 +1,8 @@
-import { Button, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import EstateCard from "../components/EstateCard";
 import { useEffect, useState } from "react";
 import { useReloadContext } from "../context/ReloadContext";
+import { Button } from "react-native-paper";
 
 export default function Home({ navigation }) {
     const [estates, setEstates] = useState([])
@@ -19,7 +20,9 @@ export default function Home({ navigation }) {
         <ScrollView contentContainerStyle={{ alignItems: 'center', paddingBottom:100 }}
             style={{ flex: 1, backgroundColor: '#fff', padding: 17 }}>
             <View>
-                <Button title="Nouveau" color="#841584" onPress={() => navigation.navigate('Nouveau')} />
+                <Button mode="contained" onPress={() => navigation.navigate('Nouveau')} icon="plus-thick" >
+                    Nouveau
+                </Button>
             </View>
             <View style={{ width: "90%" }}>
                 {estates.map(estate =>
