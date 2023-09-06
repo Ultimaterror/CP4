@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Button as PaperButton, Card, RadioButton, Text, TextInput } from 'react-native-paper';
+import { Button as PaperButton, Card, RadioButton, Text, TextInput, IconButton } from 'react-native-paper';
 import { useReloadContext } from '../context/ReloadContext';
 import { StackActions } from '@react-navigation/native';
 
@@ -9,10 +9,10 @@ const popAction = StackActions.pop(1);
 const EstateForm = ({ navigation, id = null }) => {
     const { reload, setReload } = useReloadContext()
     const [estateData, setEstateData] = useState({
-        price: "0",
-        room: "0",
-        bedroom: "0",
-        size: "0",
+        price: "",
+        room: 0,
+        bedroom: 0,
+        size: "",
         type: "",
         place: "YYY",
         picture: "X"
@@ -22,7 +22,7 @@ const EstateForm = ({ navigation, id = null }) => {
         if (id !== null) {
             fetch(`http://192.168.1.152:5000/estates/${id}`)
                 .then((res) => res.json())
-                .then((data) => setEstateData(data))
+                .then((data) => setEstateData({...data, size: String(data.size)}))
                 .catch((err) => console.log(err))
         }
     }, [])
@@ -43,7 +43,7 @@ const EstateForm = ({ navigation, id = null }) => {
     }
 
     return (
-        <View style={{ width: "90%", gap: 10 }}>
+        <View style={{ width: "90%", gap: 15 }}>
             <RadioButton.Group onValueChange={newValue => setEstateData({ ...estateData, type: newValue })} value={estateData.type}>
                 <RadioButton.Item value="Maison" label='Maison' />
                 <RadioButton.Item value="Appartement" label='Appartement' />
@@ -65,19 +65,49 @@ const EstateForm = ({ navigation, id = null }) => {
                 value={estateData.place}
                 onChangeText={newValue => setEstateData({ ...estateData, place: newValue })}
             />
-            <TextInput
-                label="Nombre de pièces"
-                inputMode='numeric'
-                value={estateData.room}
-                onChangeText={newValue => setEstateData({ ...estateData, room: newValue })}
-            />
-            <TextInput
-                label="Nombre de chambres"
-                inputMode='numeric'
-                value={estateData.bedroom}
-                onChangeText={newValue => setEstateData({ ...estateData, bedroom: newValue })}
-            />
-            <PaperButton mode="contained" onPress={() => handleSubmit()}> Ajouter</PaperButton>
+            <View>
+                <Text style={{ textAlign: "center", fontSize: 16 }}>Nombre de pièces</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
+                    <IconButton
+                        icon="minus-thick"
+                        mode='contained'
+                        iconColor="white"
+                        containerColor="red"
+                        onPress={() => estateData.room > 0 && setEstateData({ ...estateData, room: estateData.room - 1 })}
+                        disabled={estateData.room === 0}
+                    />
+                    <Text style={{ fontSize: 20 }}>{estateData.room}</Text>
+                    <IconButton
+                        icon="plus-thick"
+                        mode='contained'
+                        iconColor="white"
+                        containerColor="green"
+                        onPress={() => setEstateData({ ...estateData, room: estateData.room + 1 })}
+                    />
+                </View>
+            </View>
+            <View>
+                <Text style={{ textAlign: "center", fontSize: 16 }}>Nombre de chambres</Text>
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
+                    <IconButton
+                        icon="minus-thick"
+                        mode='contained'
+                        iconColor="white"
+                        containerColor="red"
+                        onPress={() => estateData.bedroom > 0 && setEstateData({ ...estateData, bedroom: estateData.bedroom - 1 })}
+                        disabled={estateData.bedroom === 0}
+                    />
+                    <Text style={{ fontSize: 20 }}>{estateData.bedroom}</Text>
+                    <IconButton
+                        icon="plus-thick"
+                        mode='contained'
+                        iconColor="white"
+                        containerColor="green"
+                        onPress={() => setEstateData({ ...estateData, bedroom: estateData.bedroom + 1 })}
+                    />
+                </View>
+            </View>
+            <PaperButton mode="contained" onPress={() => handleSubmit()}>Ajouter</PaperButton>
         </View>
     )
 };
