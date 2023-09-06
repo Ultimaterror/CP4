@@ -8,6 +8,7 @@ const EstateCard = ({ navigation, estate }) => (
             <Text variant="titleLarge">{estate.price} €</Text>
             <Text variant="bodyMedium">{estate.type} - {estate.size}m²</Text>
             <Text variant="bodyMedium">{estate.room} pièces - {estate.bedroom} chambres</Text>
+            <Text variant="bodyMedium">{estate.place}</Text>
         </Card.Content>
     </Card>
 );
